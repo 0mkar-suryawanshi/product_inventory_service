@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
 @Entity
 public class Product {
@@ -112,4 +114,13 @@ public class Product {
 		this.updatedAt = updatedAt;
 	}
 
+	@PrePersist
+	protected void onCreate() {
+		this.createdAt = LocalDateTime.now();
+		this.updatedAt = LocalDateTime.now();
+	}
+	@PreUpdate
+	protected void onupdate() {
+		this.updatedAt = LocalDateTime.now();
+	}
 }
